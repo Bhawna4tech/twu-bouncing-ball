@@ -1,8 +1,8 @@
 package ball;
 
 import ball.model.Ball;
-import ball.model.BouncingBall;
-import ball.model.ElasticBall;
+import ball.model.Bouncing;
+import ball.model.Elastic;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,11 +12,11 @@ public class BallTestHarness {
     }
 
     public static int oneStepDownFrom(int centerY) {
-        return centerY + BouncingBall.MOVEMENT_SPEED;
+        return centerY + Bouncing.MOVEMENT_SPEED;
     }
 
     public static int oneStepUpFrom(int centerY) {
-        return centerY - BouncingBall.MOVEMENT_SPEED;
+        return centerY - Bouncing.MOVEMENT_SPEED;
     }
 
 
@@ -25,10 +25,10 @@ public class BallTestHarness {
     }
 
     public static int oneStepInwardsFrom(int radius) {
-        return radius - ElasticBall.GROWTH_RATE;
+        return radius - Elastic.GROWTH_RATE;
     }
 
     public static int oneStepOutwardsFrom(int radius) {
-        return radius + ElasticBall.GROWTH_RATE;
+        return radius + Elastic.GROWTH_RATE;
     }
 }

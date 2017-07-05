@@ -5,10 +5,10 @@ import org.junit.Test;
 
 import static ball.BallTestHarness.*;
 
-public class BouncingBallTest {
+public class BouncingTest {
     @Test
-    public void shouldGoDown() throws Exception {
-        Ball bouncingBall = BallFactory.bouncingBall(0, 100, BouncingBall.DOWN);
+    public void shouldGoDown() {
+        Ball bouncingBall = BallFactory.bouncingBall(0, 100, Bouncing.DOWN);
 
         bouncingBall.update();
 
@@ -16,9 +16,9 @@ public class BouncingBallTest {
     }
 
     @Test
-    public void shouldGoUpAfterHittingTheBottom() throws Exception {
+    public void shouldGoUpAfterHittingTheBottom() {
         int theBottomEdge = BallWorld.BOX_HEIGHT - Ball.DEFAULT_RADIUS;
-        Ball bouncingBall = BallFactory.bouncingBall(0, theBottomEdge, BouncingBall.DOWN);
+        Ball bouncingBall = BallFactory.bouncingBall(0, theBottomEdge, Bouncing.DOWN);
 
         bouncingBall.update();
 
@@ -26,8 +26,8 @@ public class BouncingBallTest {
     }
 
     @Test
-    public void shouldGoUp() throws Exception {
-        Ball bouncingBall = BallFactory.bouncingBall(0, 100, BouncingBall.UP);
+    public void shouldGoUp() {
+        Ball bouncingBall = BallFactory.bouncingBall(0, 100, Bouncing.UP);
 
         bouncingBall.update();
 
@@ -35,9 +35,9 @@ public class BouncingBallTest {
     }
 
     @Test
-    public void shouldGoDownAfterHittingTheTop() throws Exception {
+    public void shouldGoDownAfterHittingTheTop() {
         int theTopEdge = Ball.DEFAULT_RADIUS;
-        Ball bouncingBall = BallFactory.bouncingBall(0, theTopEdge, BouncingBall.UP);
+        Ball bouncingBall = BallFactory.bouncingBall(0, theTopEdge, Bouncing.UP);
 
         bouncingBall.update();
 

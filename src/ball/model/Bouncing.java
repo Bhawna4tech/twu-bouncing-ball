@@ -2,23 +2,21 @@ package ball.model;
 
 import ball.ui.BallWorld;
 
-public class BouncingBall extends Ball {
+public class Bouncing implements Behaviour {
     public static final int MOVEMENT_SPEED = 12;
-
     static final int DOWN = 1;
     static final int UP = -1;
 
     private int direction;
 
-    BouncingBall(int x, int y, int direction) {
-        super(x, y);
+    Bouncing(int direction) {
         this.direction = direction;
     }
 
     @Override
-    public void update() {
-        direction = reverseDirectionIfNecessary();
-        y = move();
+    public void applyBehaviour(Ball ball) {
+        direction = reverseDirectionIfNecessary(ball);
+        ball.y = move(ball);
     }
 
     /***********************************************************************************
@@ -27,28 +25,28 @@ public class BouncingBall extends Ball {
      *
      ***********************************************************************************/
 
-    private int reverseDirectionIfNecessary() {
-        if (movingTooHigh() || movingTooLow()) {
+    private int reverseDirectionIfNecessary(Ball ball) {
+        if (movingTooHigh(ball) || movingTooLow(ball)) {
             return switchDirection();
         }
 
         return this.direction;
     }
 
-    private boolean movingTooLow() {
-        return y + radius >= BallWorld.BOX_HEIGHT && movingDown();
+    private boolean movingTooLow(Ball ball) {
+        return ball.y + ball.radius >= BallWorld.BOX_HEIGHT && movingDown();
     }
 
-    private boolean movingTooHigh() {
-        return y - radius <= 0 && movingUp();
+    private boolean movingTooHigh(Ball ball) {
+        return ball.y - ball.radius <= 0 && movingUp();
     }
 
     private int switchDirection() {
         return movingDown() ? UP : DOWN;
     }
 
-    private int move() {
-        return y + (MOVEMENT_SPEED * direction);
+    private int move(Ball ball) {
+        return ball.y + (MOVEMENT_SPEED * direction);
     }
 
     private boolean movingDown() {

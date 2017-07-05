@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static ball.BallTestHarness.*;
 
-public class ElasticBallTest {
+public class ElasticTest {
     @Test
     public void shouldDecreaseRadius() {
-        Ball elasticBall = BallFactory.elasticBall(0, 0, 20, ElasticBall.SHRINK);
+        Ball elasticBall = BallFactory.elasticBall(0, 0, 20, Elastic.SHRINK);
 
         elasticBall.update();
 
@@ -16,7 +16,7 @@ public class ElasticBallTest {
 
     @Test
     public void shouldIncreaseRadiusAfterFullyShrinking() throws Exception {
-        Ball elasticBall = BallFactory.elasticBall(0, 0, 0, ElasticBall.SHRINK);
+        Ball elasticBall = BallFactory.elasticBall(0, 0, 0, Elastic.SHRINK);
 
         elasticBall.update();
 
@@ -25,7 +25,7 @@ public class ElasticBallTest {
 
     @Test
     public void shouldIncreaseInSize() {
-        Ball elasticBall = BallFactory.elasticBall(250, 100, 20, ElasticBall.GROW);
+        Ball elasticBall = BallFactory.elasticBall(250, 100, 20, Elastic.GROW);
 
         elasticBall.update();
 
@@ -34,7 +34,7 @@ public class ElasticBallTest {
 
     @Test
     public void shouldDecreaseInSizeAfterFullyExpanding() throws Exception {
-        Ball elasticBall = BallFactory.elasticBall(0, 0, Ball.DEFAULT_RADIUS, ElasticBall.GROW);
+        Ball elasticBall = BallFactory.elasticBall(0, 0, Ball.DEFAULT_RADIUS, Elastic.GROW);
 
         elasticBall.update();
 

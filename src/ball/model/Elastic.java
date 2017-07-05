@@ -1,6 +1,6 @@
 package ball.model;
 
-public class ElasticBall extends Ball {
+public class Elastic implements Behaviour {
     public static final int GROWTH_RATE = 2;
 
     static final int GROW = 1;
@@ -8,15 +8,14 @@ public class ElasticBall extends Ball {
 
     private int growthDirection;
 
-    ElasticBall(int x, int y, int radius, int growthDirection) {
-        super(x, y, radius);
+    Elastic(int growthDirection) {
         this.growthDirection = growthDirection;
     }
 
     @Override
-    public void update() {
-        growthDirection = reverseGrowthDirectionIfNecessary();
-        radius = next();
+    public void applyBehaviour(Ball ball) {
+        growthDirection = reverseGrowthDirectionIfNecessary(ball);
+        ball.radius = next(ball);
     }
 
     /***********************************************************************************
@@ -25,28 +24,28 @@ public class ElasticBall extends Ball {
      *
      ***********************************************************************************/
 
-    private int reverseGrowthDirectionIfNecessary() {
-        if (growingTooBig() || shrinkingTooSmall()) {
+    private int reverseGrowthDirectionIfNecessary(Ball ball) {
+        if (growingTooBig(ball) || shrinkingTooSmall(ball)) {
             return switchDirection();
         }
 
         return this.growthDirection;
     }
 
-    private boolean shrinkingTooSmall() {
-        return radius <= 0 && shrinking();
+    private boolean shrinkingTooSmall(Ball ball) {
+        return ball.radius <= 0 && shrinking();
     }
 
-    private boolean growingTooBig() {
-        return radius >= Ball.DEFAULT_RADIUS && growing();
+    private boolean growingTooBig(Ball ball) {
+        return ball.radius >= Ball.DEFAULT_RADIUS && growing();
     }
 
     private int switchDirection() {
         return growing() ? SHRINK : GROW;
     }
 
-    private int next() {
-        return radius + (GROWTH_RATE * growthDirection);
+    private int next(Ball ball) {
+        return ball.radius + (GROWTH_RATE * growthDirection);
     }
 
     private boolean shrinking() {
